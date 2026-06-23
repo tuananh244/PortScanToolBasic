@@ -81,10 +81,11 @@ int main(int argc, char* argv[]) {
                     
                     if (is_open) {
                         open_ports_count++; // Tăng biến đếm nguyên tử một cách an toàn
-                        
-                        // Khóa Console khi in để giao diện hiển thị mượt mà không đè chữ
-                        std::lock_guard<std::mutex> lock(print_mutex);
-                        std::cout << GREEN << "[+] Host: " << ip << " \t| Port: " << port << " \t--> OPEN" << RESET << "\n";
+                        if (verbose) {
+                            // Khóa Console khi in để giao diện hiển thị mượt mà không đè chữ
+                            std::lock_guard<std::mutex> lock(print_mutex);
+                            std::cout << GREEN << "[+] Host: " << ip << " \t| Port: " << port << " \t--> OPEN" << RESET << "\n";
+                        }
                     } else {
                         closed_ports_count++;
                         
